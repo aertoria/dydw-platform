@@ -1,4 +1,3 @@
-// "Customer Engagement" line chart
 const ctxEngagement = document.getElementById('engagementChart').getContext('2d');
 const engagementChart = new Chart(ctxEngagement, {
   type: 'line',
@@ -24,7 +23,8 @@ const engagementChart = new Chart(ctxEngagement, {
     ]
   },
   options: {
-    maintainAspectRatio: false,
+    maintainAspectRatio: true, // Forces correct aspect ratio
+    responsive: true,
     scales: {
       x: {
         ticks: { color: '#ccc' },
@@ -41,44 +41,6 @@ const engagementChart = new Chart(ctxEngagement, {
           color: '#ccc'
         }
       }
-    }
-  }
-});
-
-// "Activation Funnel" bar chart (horizontal) to simulate a funnel
-const ctxFunnel = document.getElementById('funnelChart').getContext('2d');
-const funnelChart = new Chart(ctxFunnel, {
-  type: 'bar',
-  data: {
-    labels: ['User Id', 'Email Opened', 'Goal Achieved', 'Email Sent'],
-    datasets: [
-      {
-        label: 'Count',
-        data: [80, 60, 30, 100], // Example funnel steps
-        backgroundColor: [
-          '#BADA55',
-          '#6EEB83',
-          '#6EEB83',
-          '#BADA55'
-        ]
-      }
-    ]
-  },
-  options: {
-    indexAxis: 'y', // horizontal bar
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        ticks: { color: '#ccc' },
-        grid: { color: '#444' }
-      },
-      y: {
-        ticks: { color: '#ccc' },
-        grid: { color: '#444' }
-      }
-    },
-    plugins: {
-      legend: { display: false }
     }
   }
 });

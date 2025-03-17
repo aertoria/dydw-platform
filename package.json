@@ -1,7 +1,7 @@
 {
-  "name": "dydw-platform",
+  "name": "moneytize-platform",
   "version": "1.0.0",
-  "description": "DYDW Platform - Email Service",
+  "description": "Moneytize Platform - Financial Services System",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {

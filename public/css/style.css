@@ -116,6 +116,10 @@
     border-radius: 8px;
     margin-bottom: 2rem;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    height: 350px; /* Ensuring a fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .chart-container h2 {
@@ -124,10 +128,11 @@
     color: #fff;
   }
   
-  /* Add some spacing for the actual canvas element */
-  .chart-canvas {
-    max-width: 100%;
-    height: 300px;
+/* Ensure the canvas fits within the fixed height */
+.chart-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 300px; /* Prevents infinite height */
   }
   
   /* Scrollbar styling (optional) for dark theme */
