@@ -6,27 +6,33 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from "public" folder
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
+
+// Serve static files from the views directory
+app.use(express.static('views'));
 
 // Serve the index.html file on the root route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// POST route to handle form submissions
+// Serve the email.html file on the /email route
+app.get('/email', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'email.html'));
+});
+
+// POST route to handle email sending
 app.post('/send-email', async (req, res) => {
   const { to, subject, message } = req.body;
 
   // Create a transporter using your .env configuration
-  const transporter = nodemailer.createTransport({
+  let transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
-    secure: process.env.EMAIL_SECURE === 'true', // convert string "true"/"false" to boolean
+    secure: process.env.EMAIL_SECURE === 'true',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -36,7 +42,7 @@ app.post('/send-email', async (req, res) => {
   try {
     // Send mail
     await transporter.sendMail({
-      from: `"Advanced Email Sender" <${process.env.EMAIL_USER}>`,
+      from: `"Moneytize Platform" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       text: message,
@@ -52,5 +58,5 @@ app.post('/send-email', async (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

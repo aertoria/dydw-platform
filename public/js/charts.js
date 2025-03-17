@@ -23,7 +23,7 @@ const engagementChart = new Chart(ctxEngagement, {
     ]
   },
   options: {
-    maintainAspectRatio: true, // Forces correct aspect ratio
+    maintainAspectRatio: true,
     responsive: true,
     scales: {
       x: {
@@ -41,6 +41,43 @@ const engagementChart = new Chart(ctxEngagement, {
           color: '#ccc'
         }
       }
+    }
+  }
+});
+
+const ctxFunnel = document.getElementById('funnelChart').getContext('2d');
+
+const funnelData = {
+  labels: ['Emails Sent', 'Emails Opened', 'Links Clicked', 'Goals Achieved'],
+  datasets: [
+    {
+      label: 'Users',
+      data: [100, 75, 40, 20], // Example values
+      backgroundColor: ['#BADA55', '#9DCB50', '#6EEB83', '#49A078'],
+      borderRadius: 8, // Adds rounded bars for better visuals
+    }
+  ]
+};
+
+const funnelChart = new Chart(ctxFunnel, {
+  type: 'bar',
+  data: funnelData,
+  options: {
+    indexAxis: 'y', // Horizontal bar chart
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      x: {
+        ticks: { color: '#ccc' },
+        grid: { color: '#444' }
+      },
+      y: {
+        ticks: { color: '#ccc' },
+        grid: { color: '#444' }
+      }
+    },
+    plugins: {
+      legend: { display: false }
     }
   }
 });

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Management - Moneytize Platform</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .email-container {
+      padding: 20px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .email-form {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      grid-column: 1 / -1;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ccc;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #444;
+      background: #333;
+      color: #fff;
+      border-radius: 4px;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background: #6EEB83;
+      color: #000;
+    }
+
+    .btn-secondary {
+      background: #444;
+      color: #fff;
+    }
+
+    .email-history {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      grid-column: 1 / -1;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #ccc;
+    }
+
+    .history-table th,
+    .history-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+
+    .history-table th {
+      color: #6EEB83;
+    }
+
+    .template-section {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .template-card {
+      background: #333;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .template-card:hover {
+      background: #444;
+    }
+
+    .chart-section {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .chart-section h2 {
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .email-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .email-form,
+    .email-history {
+      grid-column: 1 / -1;
+    }
+
+    .chart-section {
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-section canvas {
+      flex: 1;
+    }
+
+    /* Additional styles for funnel section */
+    .funnel-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #333;
+      border-radius: 4px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-label {
+      display: block;
+      color: #ccc;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .stat-value {
+      display: block;
+      color: #6EEB83;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="brand">
+      <i class="fas fa-lemon"></i> Moneytize Platform
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="/">
+          <i class="fas fa-tachometer-alt icon"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="/email" class="active">
+          <i class="fas fa-envelope icon"></i>
+          <span>Email Sending</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fas fa-users icon"></i>
+          <span>Users</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fas fa-cog icon"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="email-container">
+      <!-- Email Composition Form -->
+      <div class="email-form">
+        <h2>Compose Email</h2>
+        <form id="emailForm">
+          <div class="form-group">
+            <label for="template">Template</label>
+            <select id="template" name="template">
+              <option value="">Select a template...</option>
+              <option value="welcome">Welcome Email</option>
+              <option value="followup">Follow-up</option>
+              <option value="newsletter">Newsletter</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="to">To</label>
+            <input type="email" id="to" name="to" placeholder="recipient@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Email subject" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Send Email</button>
+            <button type="button" class="btn btn-secondary">Save Draft</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Email History -->
+      <div class="email-history">
+        <h2>Email History</h2>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Recipient</th>
+              <th>Subject</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-03-14</td>
+              <td>user@example.com</td>
+              <td>Welcome to Moneytize</td>
+              <td><span style="color: #6EEB83">Delivered</span></td>
+            </tr>
+            <tr>
+              <td>2024-03-13</td>
+              <td>client@example.com</td>
+              <td>Your Account Update</td>
+              <td><span style="color: #6EEB83">Delivered</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Email Templates -->
+      <div class="template-section">
+        <h2>Templates</h2>
+        <div class="template-card">
+          <h3>Welcome Email</h3>
+          <p>Initial greeting for new users</p>
+        </div>
+        <div class="template-card">
+          <h3>Follow-up</h3>
+          <p>Check-in with inactive users</p>
+        </div>
+        <div class="template-card">
+          <h3>Newsletter</h3>
+          <p>Monthly updates and news</p>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-cards">
+        <div class="card">
+          <div class="card-title">TotalCampaigns</div>
+          <div class="card-value" id="sentEmails">2</div>
+        </div>
+        <div class="card">
+          <div class="card-title">TotalEmails</div>
+          <div class="card-value" id="goalAchieved">1</div>
+        </div>
+        <div class="card">
+          <div class="card-title">TotalAccounts</div>
+          <div class="card-value" id="activationRate">1</div>
+        </div>
+        <div class="card">
+          <div class="card-title">TotalExperiments</div>
+          <div class="card-value" id="ttfp">1 from 1</div>
+        </div>
+      </div>
+
+      <!-- User Stages Pie Chart -->
+      <div class="chart-section">
+        <h2>User Journey Stages</h2>
+        <canvas id="userStagesChart"></canvas>
+      </div>
+
+      <!-- Experiment Batches Flow -->
+      <div class="chart-section">
+        <h2>Experiment Batch Status</h2>
+        <canvas id="batchFlowChart"></canvas>
+      </div>
+
+      <!-- Activation Funnel -->
+      <div class="chart-section">
+        <h2>Activation Funnel</h2>
+        <div class="funnel-stats">
+          <div class="stat-item">
+            <span class="stat-label">Conversion Rate</span>
+            <span class="stat-value">23.5%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Total Users</span>
+            <span class="stat-value">1,245</span>
+          </div>
+        </div>
+        <canvas id="activationFunnelChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Email form submission handler
+    document.getElementById('emailForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      try {
+        const response = await fetch('/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(Object.fromEntries(formData)),
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Email sent successfully!');
+          e.target.reset();
+        } else {
+          alert('Failed to send email: ' + result.error);
+        }
+      } catch (error) {
+        alert('Error sending email: ' + error.message);
+      }
+    });
+
+    // Template selection handler
+    document.getElementById('template').addEventListener('change', (e) => {
+      const templates = {
+        welcome: {
+          subject: 'Welcome to Moneytize Platform',
+          message: 'Dear user,\n\nWelcome to Moneytize Platform! We\'re excited to have you on board...'
+        },
+        followup: {
+          subject: 'How are you finding Moneytize Platform?',
+          message: 'Hi there,\n\nWe noticed you haven\'t been active recently...'
+        },
+        newsletter: {
+          subject: 'Moneytize Platform Monthly Update',
+          message: 'Hello,\n\nHere are this month\'s updates and new features...'
+        }
+      };
+      
+      const selected = templates[e.target.value];
+      if (selected) {
+        document.getElementById('subject').value = selected.subject;
+        document.getElementById('message').value = selected.message;
+      }
+    });
+
+    // User Stages Pie Chart
+    const userStagesCtx = document.getElementById('userStagesChart').getContext('2d');
+    new Chart(userStagesCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Aware', 'Interest', 'Action'],
+        datasets: [{
+          data: [45, 30, 25],
+          backgroundColor: [
+            '#BADA55',
+            '#6EEB83',
+            '#57C84D'
+          ],
+          borderColor: '#2a2a2a',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              color: '#ccc',
+              font: {
+                size: 14
+              }
+            }
+          },
+          title: {
+            display: true,
+            text: 'User Distribution by Stage',
+            color: '#ccc',
+            font: {
+              size: 16
+            }
+          }
+        }
+      }
+    });
+
+    // Experiment Batch Flow Chart
+    const batchFlowCtx = document.getElementById('batchFlowChart').getContext('2d');
+    new Chart(batchFlowCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Batch A', 'Batch B', 'Batch C', 'Batch D'],
+        datasets: [
+          {
+            label: 'Sent',
+            data: [100, 150, 120, 80],
+            backgroundColor: '#BADA55'
+          },
+          {
+            label: 'Opened',
+            data: [80, 120, 90, 60],
+            backgroundColor: '#6EEB83'
+          },
+          {
+            label: 'Clicked',
+            data: [40, 60, 45, 30],
+            backgroundColor: '#57C84D'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            grid: {
+              color: '#444'
+            },
+            ticks: {
+              color: '#ccc'
+            }
+          },
+          y: {
+            grid: {
+              color: '#444'
+            },
+            ticks: {
+              color: '#ccc'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#ccc'
+            }
+          },
+          title: {
+            display: true,
+            text: 'Email Campaign Performance by Batch',
+            color: '#ccc',
+            font: {
+              size: 16
+            }
+          }
+        }
+      }
+    });
+
+    // Activation Funnel Chart
+    const activationFunnelCtx = document.getElementById('activationFunnelChart').getContext('2d');
+    
+    // Calculate percentages for the funnel
+    const funnelData = [
+      { label: 'Visited Landing', value: 1245 },
+      { label: 'Registered', value: 890 },
+      { label: 'Email Verified', value: 650 },
+      { label: 'Started Onboarding', value: 420 },
+      { label: 'Completed Activation', value: 293 }
+    ];
+
+    // Create gradient colors
+    const gradientColors = funnelData.map((_, index) => {
+      const gradient = activationFunnelCtx.createLinearGradient(0, 0, 400, 0);
+      const baseColor = index === 0 ? '#D4E157' : 
+                       index === 1 ? '#BADA55' :
+                       index === 2 ? '#8FFF98' :
+                       index === 3 ? '#6EEB83' : '#57C84D';
+      gradient.addColorStop(0, baseColor);
+      gradient.addColorStop(1, '#2a2a2a');
+      return gradient;
+    });
+
+    new Chart(activationFunnelCtx, {
+      type: 'bar',
+      data: {
+        labels: funnelData.map(d => d.label),
+        datasets: [{
+          data: funnelData.map(d => d.value),
+          backgroundColor: gradientColors,
+          borderColor: '#2a2a2a',
+          borderWidth: 1,
+          borderRadius: {
+            topLeft: 4,
+            topRight: 4,
+            bottomLeft: 4,
+            bottomRight: 4
+          },
+          barPercentage: 0.8,
+          barThickness: 30
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: {
+              color: '#444',
+              drawBorder: false,
+              display: false
+            },
+            ticks: {
+              color: '#ccc',
+              callback: function(value) {
+                return value.toLocaleString();
+              }
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#ccc',
+              font: {
+                size: 12
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#333',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                const total = funnelData[0].value;
+                const percentage = ((value / total) * 100).toFixed(1);
+                return [
+                  `Users: ${value.toLocaleString()}`,
+                  `Conversion: ${percentage}%`,
+                  `Drop-off: ${(100 - percentage).toFixed(1)}%`
+                ];
+              }
+            }
+          }
+        },
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutQuart'
+        }
+      }
+    });
+  </script>
+</body>
+</html> 
