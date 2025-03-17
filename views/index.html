@@ -10,6 +10,52 @@
   />
   <!-- Our custom CSS -->
   <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .card {
+      background: #2a2a3a;
+    }
+
+    .card-title {
+      color: #b0b8c8;
+    }
+
+    .card-value {
+      color: #7a8bff;
+      font-weight: bold;
+      font-size: 24px;
+      text-shadow: 0 0 10px rgba(122, 139, 255, 0.3);
+    }
+
+    .chart-container {
+      background: #2a2a3a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .chart-container h2 {
+      color: #b0b8c8;
+      margin-bottom: 15px;
+    }
+
+    .sidebar {
+      background: #2a2a3a;
+    }
+
+    .brand {
+      color: #d8e1f3;
+    }
+
+    .nav-links a {
+      color: #b0b8c8;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: #445066;
+      color: #7a8bff;
+    }
+  </style>
 </head>
 <body>
 
@@ -66,6 +112,18 @@
       <div class="card">
         <div class="card-title">TotalExperiments</div>
         <div class="card-value" id="ttfp">1 from 1</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Total Followup</div>
+        <div class="card-value" id="totalFollowup">24</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Followup Rate</div>
+        <div class="card-value" id="followupRate">68%</div>
+      </div>
+      <div class="card">
+        <div class="card-title">AverageFollowupWait</div>
+        <div class="card-value" id="avgFollowupWait">3.2d</div>
       </div>
     </div>
 

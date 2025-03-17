@@ -14,7 +14,7 @@
     }
     
     .email-form {
-      background: #2a2a2a;
+      background: #2a2a3a;
       padding: 20px;
       border-radius: 8px;
       grid-column: 1 / -1;
@@ -27,7 +27,7 @@
     .form-group label {
       display: block;
       margin-bottom: 5px;
-      color: #ccc;
+      color: #b0b8c8;
     }
 
     .form-group input,
@@ -35,9 +35,9 @@
     .form-group select {
       width: 100%;
       padding: 8px;
-      border: 1px solid #444;
-      background: #333;
-      color: #fff;
+      border: 1px solid #445066;
+      background: #333344;
+      color: #d8e1f3;
       border-radius: 4px;
     }
 
@@ -60,17 +60,17 @@
     }
 
     .btn-primary {
-      background: #6EEB83;
-      color: #000;
-    }
-
-    .btn-secondary {
-      background: #444;
+      background: #7a8bff;
       color: #fff;
     }
 
+    .btn-secondary {
+      background: #445066;
+      color: #d8e1f3;
+    }
+
     .email-history {
-      background: #2a2a2a;
+      background: #2a2a3a;
       padding: 20px;
       border-radius: 8px;
       grid-column: 1 / -1;
@@ -79,48 +79,49 @@
     .history-table {
       width: 100%;
       border-collapse: collapse;
-      color: #ccc;
+      color: #b0b8c8;
     }
 
     .history-table th,
     .history-table td {
       padding: 12px;
       text-align: left;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #445066;
     }
 
     .history-table th {
-      color: #6EEB83;
+      color: #7a8bff;
     }
 
     .template-section {
-      background: #2a2a2a;
+      background: #2a2a3a;
       padding: 20px;
       border-radius: 8px;
     }
 
     .template-card {
-      background: #333;
+      background: #333344;
       padding: 15px;
       border-radius: 4px;
       margin-bottom: 10px;
       cursor: pointer;
       transition: background 0.3s;
+      color: #b0b8c8;
     }
 
     .template-card:hover {
-      background: #444;
+      background: #445066;
     }
 
     .chart-section {
-      background: #2a2a2a;
+      background: #2a2a3a;
       padding: 20px;
       border-radius: 8px;
       margin-top: 20px;
     }
 
     .chart-section h2 {
-      color: #ccc;
+      color: #b0b8c8;
       margin-bottom: 15px;
     }
 
@@ -149,7 +150,7 @@
       justify-content: space-around;
       margin-bottom: 20px;
       padding: 10px;
-      background: #333;
+      background: #333344;
       border-radius: 4px;
     }
 
@@ -159,16 +160,31 @@
 
     .stat-label {
       display: block;
-      color: #ccc;
+      color: #b0b8c8;
       font-size: 14px;
       margin-bottom: 5px;
     }
 
     .stat-value {
       display: block;
-      color: #6EEB83;
+      color: #7a8bff;
       font-size: 24px;
       font-weight: bold;
+    }
+
+    .card {
+      background: #2a2a3a;
+    }
+
+    .card-title {
+      color: #b0b8c8;
+    }
+
+    .card-value {
+      color: #7a8bff;
+      font-weight: bold;
+      font-size: 24px;
+      text-shadow: 0 0 10px rgba(122, 139, 255, 0.3);
     }
   </style>
 </head>
@@ -258,13 +274,13 @@
               <td>2024-03-14</td>
               <td>user@example.com</td>
               <td>Welcome to Moneytize</td>
-              <td><span style="color: #6EEB83">Delivered</span></td>
+              <td><span style="color: #7a8bff">Delivered</span></td>
             </tr>
             <tr>
               <td>2024-03-13</td>
               <td>client@example.com</td>
               <td>Your Account Update</td>
-              <td><span style="color: #6EEB83">Delivered</span></td>
+              <td><span style="color: #7a8bff">Delivered</span></td>
             </tr>
           </tbody>
         </table>
@@ -304,6 +320,18 @@
         <div class="card">
           <div class="card-title">TotalExperiments</div>
           <div class="card-value" id="ttfp">1 from 1</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Total Followup</div>
+          <div class="card-value" id="totalFollowup">24</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Followup Rate</div>
+          <div class="card-value" id="followupRate">68%</div>
+        </div>
+        <div class="card">
+          <div class="card-title">AverageFollowupWait</div>
+          <div class="card-value" id="avgFollowupWait">3.2d</div>
         </div>
       </div>
 
@@ -397,11 +425,11 @@
         datasets: [{
           data: [45, 30, 25],
           backgroundColor: [
-            '#BADA55',
-            '#6EEB83',
-            '#57C84D'
+            'rgba(122, 139, 255, 0.9)',
+            'rgba(89, 102, 255, 0.9)',
+            'rgba(65, 80, 255, 0.9)'
           ],
-          borderColor: '#2a2a2a',
+          borderColor: '#2a2a3a',
           borderWidth: 2
         }]
       },
@@ -411,7 +439,7 @@
           legend: {
             position: 'right',
             labels: {
-              color: '#ccc',
+              color: '#b0b8c8',
               font: {
                 size: 14
               }
@@ -420,7 +448,7 @@
           title: {
             display: true,
             text: 'User Distribution by Stage',
-            color: '#ccc',
+            color: '#b0b8c8',
             font: {
               size: 16
             }
@@ -439,17 +467,17 @@
           {
             label: 'Sent',
             data: [100, 150, 120, 80],
-            backgroundColor: '#BADA55'
+            backgroundColor: 'rgba(122, 139, 255, 0.9)'
           },
           {
             label: 'Opened',
             data: [80, 120, 90, 60],
-            backgroundColor: '#6EEB83'
+            backgroundColor: 'rgba(89, 102, 255, 0.9)'
           },
           {
             label: 'Clicked',
             data: [40, 60, 45, 30],
-            backgroundColor: '#57C84D'
+            backgroundColor: 'rgba(65, 80, 255, 0.9)'
           }
         ]
       },
@@ -458,31 +486,31 @@
         scales: {
           x: {
             grid: {
-              color: '#444'
+              color: '#445066'
             },
             ticks: {
-              color: '#ccc'
+              color: '#b0b8c8'
             }
           },
           y: {
             grid: {
-              color: '#444'
+              color: '#445066'
             },
             ticks: {
-              color: '#ccc'
+              color: '#b0b8c8'
             }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: '#ccc'
+              color: '#b0b8c8'
             }
           },
           title: {
             display: true,
             text: 'Email Campaign Performance by Batch',
-            color: '#ccc',
+            color: '#b0b8c8',
             font: {
               size: 16
             }
@@ -506,12 +534,12 @@
     // Create gradient colors
     const gradientColors = funnelData.map((_, index) => {
       const gradient = activationFunnelCtx.createLinearGradient(0, 0, 400, 0);
-      const baseColor = index === 0 ? '#D4E157' : 
-                       index === 1 ? '#BADA55' :
-                       index === 2 ? '#8FFF98' :
-                       index === 3 ? '#6EEB83' : '#57C84D';
+      const baseColor = index === 0 ? 'rgba(122, 139, 255, 0.9)' : 
+                       index === 1 ? 'rgba(106, 121, 255, 0.9)' :
+                       index === 2 ? 'rgba(89, 102, 255, 0.9)' :
+                       index === 3 ? 'rgba(73, 84, 255, 0.9)' : 'rgba(65, 80, 255, 0.9)';
       gradient.addColorStop(0, baseColor);
-      gradient.addColorStop(1, '#2a2a2a');
+      gradient.addColorStop(1, '#2a2a3a');
       return gradient;
     });
 
@@ -522,7 +550,7 @@
         datasets: [{
           data: funnelData.map(d => d.value),
           backgroundColor: gradientColors,
-          borderColor: '#2a2a2a',
+          borderColor: '#2a2a3a',
           borderWidth: 1,
           borderRadius: {
             topLeft: 4,
@@ -541,12 +569,12 @@
         scales: {
           x: {
             grid: {
-              color: '#444',
+              color: '#445066',
               drawBorder: false,
               display: false
             },
             ticks: {
-              color: '#ccc',
+              color: '#b0b8c8',
               callback: function(value) {
                 return value.toLocaleString();
               }
@@ -557,7 +585,7 @@
               display: false
             },
             ticks: {
-              color: '#ccc',
+              color: '#b0b8c8',
               font: {
                 size: 12
               }

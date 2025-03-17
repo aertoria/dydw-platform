@@ -106,7 +106,8 @@
   .card .card-value {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #BADA55; /* neon accent color, adjust as needed (#BADA55 is a playful color hex) */
+    color: #7a8bff; /* Changed from #BADA55 to match our blue theme */
+    text-shadow: 0 0 10px rgba(122, 139, 255, 0.3);
   }
   
   /* Chart container styling */

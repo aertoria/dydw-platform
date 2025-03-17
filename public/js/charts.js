@@ -1,83 +1,128 @@
-const ctxEngagement = document.getElementById('engagementChart').getContext('2d');
-const engagementChart = new Chart(ctxEngagement, {
+const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+new Chart(engagementCtx, {
   type: 'line',
   data: {
-    labels: ['Mar 8', 'Mar 9', 'Mar 10', 'Mar 11', 'Mar 12', 'Mar 13', 'Mar 14'],
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
-        label: 'Click-through',
-        data: [0, 0, 1, 2, 2, 5, 8],
-        borderColor: '#BADA55',
-        backgroundColor: 'rgba(186, 218, 85, 0.2)',
-        fill: true,
-        tension: 0.1
+        label: 'Active Users',
+        data: [65, 59, 80, 81, 56, 55],
+        borderColor: '#7a8bff',
+        backgroundColor: 'rgba(122, 139, 255, 0.1)',
+        tension: 0.4,
+        fill: true
       },
       {
-        label: 'Open Rate',
-        data: [0, 0, 2, 3, 4, 6, 10],
-        borderColor: '#6EEB83',
-        backgroundColor: 'rgba(110, 235, 131, 0.2)',
-        fill: true,
-        tension: 0.1
+        label: 'Engagement Score',
+        data: [28, 48, 40, 19, 86, 27],
+        borderColor: '#4150ff',
+        backgroundColor: 'rgba(65, 80, 255, 0.1)',
+        tension: 0.4,
+        fill: true
       }
     ]
   },
   options: {
-    maintainAspectRatio: true,
     responsive: true,
-    scales: {
-      x: {
-        ticks: { color: '#ccc' },
-        grid: { color: '#444' }
-      },
-      y: {
-        ticks: { color: '#ccc' },
-        grid: { color: '#444' }
-      }
-    },
     plugins: {
       legend: {
+        position: 'top',
         labels: {
-          color: '#ccc'
+          color: '#b0b8c8',
+          font: {
+            size: 12
+          }
+        }
+      },
+      title: {
+        display: true,
+        text: 'Monthly User Engagement',
+        color: '#b0b8c8',
+        font: {
+          size: 16
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: '#445066'
+        },
+        ticks: {
+          color: '#b0b8c8'
+        }
+      },
+      x: {
+        grid: {
+          color: '#445066'
+        },
+        ticks: {
+          color: '#b0b8c8'
         }
       }
     }
   }
 });
 
-const ctxFunnel = document.getElementById('funnelChart').getContext('2d');
+const funnelCtx = document.getElementById('funnelChart').getContext('2d');
 
-const funnelData = {
-  labels: ['Emails Sent', 'Emails Opened', 'Links Clicked', 'Goals Achieved'],
-  datasets: [
-    {
-      label: 'Users',
-      data: [100, 75, 40, 20], // Example values
-      backgroundColor: ['#BADA55', '#9DCB50', '#6EEB83', '#49A078'],
-      borderRadius: 8, // Adds rounded bars for better visuals
-    }
-  ]
-};
+// Create gradient for funnel bars
+const funnelGradient = funnelCtx.createLinearGradient(0, 0, 400, 0);
+funnelGradient.addColorStop(0, '#7a8bff');
+funnelGradient.addColorStop(1, '#2a2a3a');
 
-const funnelChart = new Chart(ctxFunnel, {
+new Chart(funnelCtx, {
   type: 'bar',
-  data: funnelData,
+  data: {
+    labels: ['Visited', 'Signed Up', 'Activated', 'Engaged', 'Retained'],
+    datasets: [{
+      data: [1000, 700, 500, 300, 200],
+      backgroundColor: [
+        'rgba(122, 139, 255, 0.9)',
+        'rgba(106, 121, 255, 0.9)',
+        'rgba(89, 102, 255, 0.9)',
+        'rgba(73, 84, 255, 0.9)',
+        'rgba(65, 80, 255, 0.9)'
+      ],
+      borderColor: '#2a2a3a',
+      borderWidth: 1,
+      borderRadius: 4
+    }]
+  },
   options: {
-    indexAxis: 'y', // Horizontal bar chart
-    maintainAspectRatio: false,
+    indexAxis: 'y',
     responsive: true,
-    scales: {
-      x: {
-        ticks: { color: '#ccc' },
-        grid: { color: '#444' }
+    plugins: {
+      legend: {
+        display: false
       },
-      y: {
-        ticks: { color: '#ccc' },
-        grid: { color: '#444' }
+      title: {
+        display: true,
+        text: 'User Journey Funnel',
+        color: '#b0b8c8',
+        font: {
+          size: 16
+        }
       }
     },
-    plugins: {
-      legend: { display: false }
+    scales: {
+      x: {
+        grid: {
+          color: '#445066'
+        },
+        ticks: {
+          color: '#b0b8c8'
+        }
+      },
+      y: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          color: '#b0b8c8'
+        }
+      }
     }
   }
 });
